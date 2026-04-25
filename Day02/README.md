@@ -19,3 +19,6 @@ program used: ChatGPT
 
 prompt:
 what is the python syntax for calculating the square root of a value?
+
+response:
+![ChatGPT response](images/ChatGPT_answer_260425.png)
