@@ -30,7 +30,5 @@ def determine_nuclei_types(exp_type):
         factor_a = 1
         factor_b = 5
 
-    else:
-        print("not a valid experiment type")
 
     return (type1, type2, factor_a, factor_b)
