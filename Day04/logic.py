@@ -35,38 +35,3 @@ def determine_nuclei_types(exp_type):
 
 
 
-def read_experiment_file(filename):
-
-    peaks = {}
-
-    with open(filename, "r") as file:
-
-        # Skip header
-        next(file)
-
-        for line_number, line in enumerate(file, start=2):
-
-            line = line.strip()
-
-            #skip empty lines
-            if not line:
-                continue
-
-            parts = line.split()
-
-            #make sure there are at least 3 data fields for each peak (name and 2 values)
-            if len(parts) < 3:
-                print(f"Skipping bad line {line_number}")
-                continue
-
-            try:
-                peak_name = parts[0]
-                w1 = float(parts[1])
-                w2 = float(parts[2])
-
-                peaks[peak_name] = (w1, w2)
-
-            except ValueError:
-                print(f"Non-numeric data on line {line_number}")
-
-    return peaks
