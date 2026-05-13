@@ -25,3 +25,5 @@ ChatGPT online
 
 1. "I wrote a python code that recieves user input (via the "input" command), calls a couple of modules to run on the input then return an output value. If I show you this code, can you write me a new code that will do the same via a tkinter gui?"
 
+
+
