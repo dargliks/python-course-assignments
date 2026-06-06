@@ -1,8 +1,6 @@
 import streamlit as st
 import CSP_calculator as cc
 
-#from CSP_calculator import parse_experiment_data, calculate_csp_results
-
 st.title ("Protein NMR - CSP calculator")
 
 st.write ("welcome to the chemical shift perturbation calculator!")
@@ -39,7 +37,7 @@ if st.button("Process Files"):
         exp2_data = cc.parse_experiment_data(lines2)
 
         #run calculation
-        df,fig = cc.calculate_csp_results(exp_type, exp1_data, exp1_data)
+        df,fig = cc.calculate_csp_results(exp_type, exp1_data, exp2_data)
 
         #display results
         st.subheader("Results Table")
