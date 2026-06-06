@@ -40,6 +40,15 @@ if st.button("Process Files"):
         st.subheader("Results Table")
         st.dataframe(df)
 
+        csv_data = df.to_csv(index=False)
+
+        st.download_button(
+            label="Download Results CSV",
+            data=csv_data,
+            file_name="csp_results.csv",
+            mime="text/csv"
+        )
+
         st.subheader("CSP Plot")
         st.pyplot(fig)
 
