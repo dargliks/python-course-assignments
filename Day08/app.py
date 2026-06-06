@@ -65,7 +65,7 @@ if "fig" in st.session_state:
 
     #download PNG plot
     png_buffer = BytesIO()
-    fig.savefig(png_buffer, format="png")
+    st.session_state.fig.savefig(png_buffer, format="png")
     png_buffer.seek(0)
         
     st.download_button(
