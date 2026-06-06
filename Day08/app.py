@@ -38,32 +38,38 @@ if st.button("Process Files"):
         #run calculation
         df,fig = cc.calculate_csp_results(exp_type, exp1_data, exp2_data)
 
-        #display results
-        st.subheader("Results Table")
-        st.dataframe(df)
+        st.session_state.df = df
+        st.session_state.fig = fig
 
-        csv_data = df.to_csv(index=False)
 
-        st.download_button(
-            label="Download Results CSV",
-            data=csv_data,
-            file_name="csp_results.csv",
-            mime="text/csv"
-        )
+if "df" in st.session_state:
 
-        #display plot
-        st.subheader("CSP Plot")
-        st.pyplot(fig)
+    #display results
+    st.subheader("Results Table")
+    st.dataframe(df)
 
-        #download PNG plot
-        png_buffer = BytesIO()
-        fig.savefig(png_buffer, format="png")
-        png_buffer.seek(0)
+    csv_data = df.to_csv(index=False)
+
+    st.download_button(
+        label="Download Results CSV",
+        data=csv_data,
+        file_name="csp_results.csv",
+        mime="text/csv"
+    )
+
+    #display plot
+    st.subheader("CSP Plot")
+    st.pyplot(fig)
+
+    #download PNG plot
+    png_buffer = BytesIO()
+    fig.savefig(png_buffer, format="png")
+    png_buffer.seek(0)
         
-        st.download_button(
-            label="Download Plot PNG",
-            data=png_buffer,
-            file_name="csp_plot.png",
-            mime="image/png"
-        )
+    st.download_button(
+        label="Download Plot PNG",
+        data=png_buffer,
+        file_name="csp_plot.png",
+        mime="image/png"
+    )
 
