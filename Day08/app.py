@@ -63,10 +63,14 @@ if "fig" in st.session_state:
     st.subheader("CSP Plot")
     st.pyplot(st.session_state.fig)
 
-    #download PNG plot
+    #download plot
     png_buffer = BytesIO()
     st.session_state.fig.savefig(png_buffer, format="png")
     png_buffer.seek(0)
+
+    svg_buffer = BytesIO()
+    st.session_state.fig.savefig(svg_buffer, format="svg")
+    svg_buffer.seek(0)
         
     st.download_button(
         label="Download Plot PNG",
@@ -74,4 +78,11 @@ if "fig" in st.session_state:
         file_name="csp_plot.png",
         mime="image/png"
     )
+
+    st.download_button(
+    label="Download Plot SVG",
+    data=svg_buffer,
+    file_name="csp_plot.svg",
+    mime="image/svg+xml"
+)
 
