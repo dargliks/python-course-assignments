@@ -1,3 +1,7 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
 def calc_CSP(nuc1_f1, nuc1_f2, nuc2_f1, nuc2_f2, a, b):
     
     #calculate shift for each dimention individually:
@@ -70,7 +74,7 @@ def parse_experiment_data(lines):
 
     return peaks
 
-def calculate_csp_resuts (exp_type, exp1_data, exp2_data):
+def calculate_csp_results (exp_type, exp1_data, exp2_data):
 
     nuc1_type, nuc2_type, fact_a, fact_b = determine_nuclei_types(exp_type)
 
@@ -79,7 +83,7 @@ def calculate_csp_resuts (exp_type, exp1_data, exp2_data):
     for peak_name in exp1_data:
 
         if peak_name not in exp2_data:
-            missing_peaks.append(peak_name)
+            #missing_peaks.append(peak_name)
             continue
 
         nuc1_f1, nuc2_f1 = exp1_data[peak_name]

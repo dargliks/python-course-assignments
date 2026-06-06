@@ -1,6 +1,7 @@
 import streamlit as st
+import CSP_calculator as cc
 
-from CSP_calculator import calc_CSP, parse_experiment_data, determine_nuclei_types
+#from CSP_calculator import parse_experiment_data, calculate_csp_results
 
 st.title ("Protein NMR - CSP calculator")
 
@@ -33,8 +34,17 @@ if st.button("Process Files"):
         lines1 = file1.getvalue().decode().splitlines()
         lines2 = file2.getvalue().decode().splitlines()
 
-        exp1_data = parse_experiment_data(lines1)
-        exp2_data = parse_experiment_data(lines2)
+        #parse data files
+        exp1_data = cc.parse_experiment_data(lines1)
+        exp2_data = cc.parse_experiment_data(lines2)
 
-        st.success("Files parsed successfully.")
+        #run calculation
+        df,fig = cc.calculate_csp_results(exp_type, exp1_data, exp1_data)
+
+        #display results
+        st.subheader("Results Table")
+        st.dataframe(df)
+
+        st.subheader("CSP Plot")
+        st.pyplot(fig)
 
