@@ -48,7 +48,7 @@ if "df" in st.session_state:
     st.subheader("Results Table")
     st.dataframe(st.session_state.df)
 
-    csv_data = df.to_csv(index=False)
+    csv_data = st.session_state.df.to_csv(index=False).to_csv(index=False)
 
     st.download_button(
         label="Download Results CSV",
