@@ -50,6 +50,7 @@ if "df" in st.session_state:
 
     csv_data = st.session_state.df.to_csv(index=False)
 
+    #download results
     st.download_button(
         label="Download Results CSV",
         data=csv_data,
@@ -57,9 +58,10 @@ if "df" in st.session_state:
         mime="text/csv"
     )
 
+if "fig" in st.session_state:
     #display plot
     st.subheader("CSP Plot")
-    st.pyplot(fig)
+    st.pyplot(st.session_state.fig)
 
     #download PNG plot
     png_buffer = BytesIO()
