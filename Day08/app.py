@@ -1,6 +1,8 @@
 import streamlit as st
 import CSP_calculator as cc
 
+from io import BytesIO
+
 st.title ("Protein NMR - CSP calculator")
 
 st.write ("welcome to the chemical shift perturbation calculator!")
@@ -49,6 +51,19 @@ if st.button("Process Files"):
             mime="text/csv"
         )
 
+        #display plot
         st.subheader("CSP Plot")
         st.pyplot(fig)
+
+        #download PNG plot
+        png_buffer = BytesIO()
+        fig.savefig(png_buffer, format="png")
+        png_buffer.seek(0)
+        
+        st.download_button(
+            label="Download Plot PNG",
+            data=png_buffer,
+            file_name="csp_plot.png",
+            mime="image/png"
+        )
 
