@@ -46,7 +46,7 @@ if "df" in st.session_state:
 
     #display results
     st.subheader("Results Table")
-    st.dataframe(df)
+    st.dataframe(st.session_state.df)
 
     csv_data = df.to_csv(index=False)
 
