@@ -28,9 +28,6 @@ if st.button("Process Files"):
 
         lines1 = text1.splitlines()
         lines2 = text2.splitlines()
-        
-        lines1 = file1.getvalue().decode().splitlines()
-        lines2 = file2.getvalue().decode().splitlines()
 
         #parse data files
         exp1_data = cc.parse_experiment_data(lines1)
