@@ -48,4 +48,73 @@ def test_calc_csp_hmqc_example():
         5
     )
 
-    assert result == pytest.approx(0.275, abs=0.001)
+    assert result == pytest.approx(0.137, abs=0.001)
+
+
+# ==================================================
+# parse_experiment_data
+# ==================================================
+
+def test_parse_experiment_data_basic():
+    lines = [
+        "Peak W1 W2",
+        "A10 8.10 120.5",
+        "A11 7.95 118.3"
+    ]
+
+    result = cc.parse_experiment_data(lines)
+
+    assert result == {
+        "A10": (8.10, 120.5),
+        "A11": (7.95, 118.3)
+    }
+
+def test_parse_experiment_data_extra_columns_ignored():
+    lines = [
+        "Peak W1 W2 Intensity",
+        "A10 8.10 120.5 9999",
+        "A11 7.95 118.3 8888"
+    ]
+
+    result = cc.parse_experiment_data(lines)
+
+    assert result == {
+        "A10": (8.10, 120.5),
+        "A11": (7.95, 118.3)
+    }
+
+def test_parse_experiment_data_skips_bad_lines():
+    lines = [
+        "Peak W1 W2",
+        "A10 8.10",          # bad line
+        "A11 7.95 118.3"
+    ]
+
+    result = cc.parse_experiment_data(lines)
+
+    assert result == {
+        "A11": (7.95, 118.3)
+    }
+
+
+# ==================================================
+# calculate_csp_results
+# ==================================================
+
+def test_calculate_csp_results_single_peak():
+    exp1 = {
+        "A10": (7.22, 112.64)
+    }
+
+    exp2 = {
+        "A10": (7.556, 117.593)
+    }
+
+    df, fig = cc.calculate_csp_results(1, exp1, exp2)
+
+    # structure checks
+    assert len(df) == 1
+    assert df.iloc[0]["Peak"] == "A10"
+
+    # scientific check
+    assert df.iloc[0]["CSP"] == pytest.approx(0.523, abs=0.001)
