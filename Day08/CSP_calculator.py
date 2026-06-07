@@ -29,8 +29,8 @@ def determine_nuclei_types(exp_type):
         factor_b = 0.2
 
     if exp_type == 2:
-        type1 = "1H"
-        type2 = "13C"
+        type1 = "13C"
+        type2 = "1H"
         factor_a = 1
         factor_b = 5
 
